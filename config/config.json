@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "policies-viewer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/policiesViewer/PoliciesViewerWebPart.js",
+          "manifest": "./src/webparts/policiesViewer/PoliciesViewerWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PoliciesViewerWebPartStrings": "lib/webparts/policiesViewer/loc/{locale}.js"
+  }
+}

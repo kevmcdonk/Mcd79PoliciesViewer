@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mcd-79-policies-viewer-client-side-solution",
+    "id": "461929ed-6c98-416b-aaf0-c2887121afc2",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/mcd-79-policies-viewer.sppkg"
+  }
+}
