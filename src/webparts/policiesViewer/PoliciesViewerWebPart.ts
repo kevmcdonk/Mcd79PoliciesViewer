@@ -1,22 +1,17 @@
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
-import { escape } from '@microsoft/sp-lodash-subset';
 
-import styles from './PoliciesViewerWebPart.module.scss';
 import * as strings from 'PoliciesViewerWebPartStrings';
-
+import PoliciesViewer from './components/PoliciesViewer';
+import { IPoliciesViewerProps } from './components/IPoliciesViewerProps';
 import { setup as pnpSetup } from "@pnp/common";
-
-
-import * as $ from 'jquery';
-import { JQuery } from 'jquery';
-const Masonry: any = require('masonry-layout');
-const jQueryBridget: any = require('jquery-bridget/jquery-bridget');
-jQueryBridget('masonry', Masonry, $);
+import { sp } from "@pnp/sp";
 
 export interface IPoliciesViewerWebPartProps {
   description: string;
@@ -24,57 +19,35 @@ export interface IPoliciesViewerWebPartProps {
 
 export default class PoliciesViewerWebPart extends BaseClientSideWebPart<IPoliciesViewerWebPartProps> {
 
-  private $masonry: any = undefined;
-
   public onInit(): Promise<void> {
 
     return super.onInit().then(_ => {
-  
-      // other init code may be present
-  
       pnpSetup({
+        spfxContext: this.context
+      });
+      sp.setup({
         spfxContext: this.context
       });
     });
   }
 
+  
   public render(): void {
-    
-    this.domElement.innerHTML = `
-      <h2>${this.properties.description}</h2>
-      <div class="${styles.policiesViewer}"></div>`;
+    const element: React.ReactElement<IPoliciesViewerProps > = React.createElement(
+      PoliciesViewer,
+      {
+        serviceScope: this.context.serviceScope,
+        imageGalleryName: 'Site Pages',
+        imagesToDisplay: 20
+        // description: this.properties.description
+      }
+    );
 
-      const $container: JQuery = $(`.${styles.policiesViewer}`, this.domElement);
-    for (let i: number = 0; i < 15; i++) {
-      const height: number = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
-      $container.append(`<img src="http://lorempixel.com/150/${height}/?d=${new Date().getTime().toString()}" width="150" height="${height}" />`);
-    }
+    ReactDom.render(element, this.domElement);
+  }
 
-    if (this.renderedOnce) {
-      this.$masonry.masonry('destroy');
-    }
-
-    this.$masonry = ($container as any).masonry({
-      itemSelector: 'img',
-      columnWidth: 150,
-      gutter: 10
-    });
-    /*this.domElement.innerHTML = `
-      <div class="${ styles.policiesViewer }">
-        <div class="${ styles.container }">
-          <div class="${ styles.row }">
-            <div class="${ styles.column }">
-              <span class="${ styles.title }">Welcome to SharePoint!</span>
-              <p class="${ styles.subTitle }">Customize SharePoint experiences using Web Parts.</p>
-              <p class="${ styles.description }">${escape(this.properties.description)}</p>
-              <a href="https://aka.ms/spfx" class="${ styles.button }">
-                <span class="${ styles.label }">Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>`;
-      */
+  protected onDispose(): void {
+    ReactDom.unmountComponentAtNode(this.domElement);
   }
 
   protected get dataVersion(): Version {

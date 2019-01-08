@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "fa77092c-4c65-44e3-9907-170cbe78aa26",
+  "id": "80d536b2-0416-48f3-8d32-5528eec22db5",
   "alias": "PoliciesViewerWebPart",
   "componentType": "WebPart",
 
@@ -14,13 +14,13 @@
   "requiresCustomScript": false,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
     "group": { "default": "Other" },
-    "title": { "default": "PoliciesViewer" },
+    "title": { "default": "Policies Viewer" },
     "description": { "default": "View all corporate policies from single interface" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "PoliciesViewer"
+      "description": "Policies Viewer"
     }
   }]
 }

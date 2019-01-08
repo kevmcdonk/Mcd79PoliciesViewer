@@ -1,6 +1,6 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-.policiesViewer {
+.PoliciesViewer {
   .container {
     max-width: 700px;
     margin: 0px auto;
@@ -9,9 +9,11 @@
 
   .row {
     @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
-    padding: 20px;
+  }
+
+  .paddedBottomRow {
+    @include ms-Grid-row;
+    padding-bottom: 20px;
   }
 
   .column {

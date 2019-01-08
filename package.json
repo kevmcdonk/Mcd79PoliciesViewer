@@ -19,11 +19,17 @@
     "@pnp/logging": "^1.2.7",
     "@pnp/odata": "^1.2.7",
     "@pnp/sp": "^1.2.7",
+    "@pnp/sp-clientsvc": "^1.2.7",
+    "@pnp/sp-taxonomy": "^1.2.7",
     "@types/es6-promise": "0.0.33",
+    "@types/react": "16.4.2",
+    "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
-    "jquery": "^3.3.1",
-    "jquery-bridget": "^2.0.1",
-    "masonry-layout": "^4.2.2"
+    "moment": "^2.23.0",
+    "office-ui-fabric-react": "^5.124.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "sp-pnp-js": "^3.0.10"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "1.7.1",
