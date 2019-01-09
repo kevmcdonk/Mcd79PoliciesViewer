@@ -23,7 +23,6 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
 
   private SitePagesServiceInstance: ISitePagesService;
   private TaxonomyServiceInstance: ITaxonomyService;
-  private Tax
   private _noOfItems: number;
   private card: any;
   private renderedCard: any = "";
@@ -112,6 +111,7 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
       };
       
       const webAbsoluteUrl = this.SitePagesServiceInstance._pageContext.web.absoluteUrl;
+      //TODO: Remove Guids from iconURL
       const tenancyUrl = this.SitePagesServiceInstance._pageContext.web.absoluteUrl.replace(this.SitePagesServiceInstance._pageContext.web.serverRelativeUrl,'');
       let iconUrl = this.SitePagesServiceInstance._pageContext.web.absoluteUrl + '/_layouts/15/getpreview.ashx?clientType=docLibGrid&guidFile={';
       iconUrl += page.UniqueId;
@@ -133,7 +133,7 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
       </DocumentCard>
       </div>);
       cards.push(card);
-     })
+     });
     }
     {
       return cards;
@@ -173,9 +173,6 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
               onFocus: (ev: React.FocusEvent<HTMLInputElement>) => console.log('onFocus called'),
               'aria-label': 'Tag Picker'
             }}
-            /*
-            componentRef={this._picker}
-            */
           />
         </div>
       </div>
@@ -187,7 +184,6 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
       </div>
     );
     return details;
-    // </div></div>return this.createCards();
   }
 
   private _getTextFromItem(item: ITag): string {
@@ -198,26 +194,18 @@ export default class PoliciesViewer extends React.Component<IPoliciesViewerProps
     this.loadPages(tags);
     
     return tags;
-  };
-
-  private _onFilterChanged = (filterText: string, tagList: ITag[]): ITag[] => {
-    return filterText
-      ? this._filterTags
-          .filter(tag => tag.name.toLowerCase().indexOf(filterText.toLowerCase()) === 0)
-          .filter(tag => !this._listContainsDocument(tag, tagList))
-      : [];
-  };
+  }
 
   private _onFilterChangedNoFilter = (filterText: string, tagList: ITag[]): ITag[] => {
     return filterText ? this._filterTags.filter(tag => tag.name.toLowerCase().indexOf(filterText.toLowerCase()) === 0) : [];
-  };
+  }
 
   private _onItemSelected = (item: ITag): ITag | null => {
     if (this._picker.current && this._listContainsDocument(item, this._picker.current.items)) {
       return null;
     }
     return item;
-  };
+  }
 
   private _listContainsDocument(tag: ITag, tagList?: ITag[]) {
     if (!tagList || !tagList.length || tagList.length === 0) {
