@@ -11,7 +11,8 @@ import * as strings from 'PoliciesViewerWebPartStrings';
 import PoliciesViewer from './components/PoliciesViewer';
 import { IPoliciesViewerProps } from './components/IPoliciesViewerProps';
 import { setup as pnpSetup } from "@pnp/common";
-import { sp } from "@pnp/sp";
+import { sp } from '@pnp/sp';
+import pnp from 'sp-pnp-js';
 
 export interface IPoliciesViewerWebPartProps {
   description: string;
@@ -26,6 +27,9 @@ export default class PoliciesViewerWebPart extends BaseClientSideWebPart<IPolici
         spfxContext: this.context
       });
       sp.setup({
+        spfxContext: this.context
+      });
+      pnp.setup({
         spfxContext: this.context
       });
     });
